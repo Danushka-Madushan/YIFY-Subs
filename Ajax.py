@@ -8,9 +8,7 @@ def main():
     _querry = input('\n Movie : ')
     if not _querry: None
     else:
-        params = {
-            'mov': _querry,
-        }
+        params = {'mov': _querry}
         _data, x = {}, 0
         response = requests.get(AjaxRequest.search, headers=headers, params=params)
         if response.status_code == 200:
