@@ -12,7 +12,6 @@ def main():
             'mov': _querry,
         }
         _data, x = {}, 0
-
         response = requests.get(AjaxRequest.search, headers=headers, params=params)
         if response.status_code == 200:
             for each in response.json():
