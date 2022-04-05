@@ -30,7 +30,8 @@ def main():
                     _htm = requests.get(AjaxRequest.get+_data[int(d)][0], headers=headers)
                     if _htm.status_code == 200:
                         _reghtm = re.sub('\n', '', _htm.content.decode('utf-8'))
-                        '''with open('base.txt', 'w', encoding='utf-8') as f: f.write(_reghtm)'''# For Debugging Purposes
+                        # For Debugging Purposes
+                        '''with open('base.txt', 'w', encoding='utf-8') as f: f.write(_reghtm)'''
                         _tabledata = re.findall(r'<tbody>.+</tbody>', _reghtm)[0]
                         engsubs = re.findall(r'%s' % AjaxRequest.Regex['Regex01'], _tabledata)
                     else:
