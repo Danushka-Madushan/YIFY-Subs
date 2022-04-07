@@ -18,7 +18,7 @@ def main():
                 _data[x] = (each['imdb'], each['movie'])
                 print(" |%s| %s" % (str(x).zfill(len(str(len(response.json())))), each['movie']))
         else:
-            raise RuntimeError('Error on Search [17] : %s' % response.status_code)
+            raise RuntimeError('Error on Search [13] : %s' % response.status_code)
         d = input('\n Select Movie : ')
         if not d: None
         else:
@@ -35,7 +35,7 @@ def main():
                         _tabledata = re.findall(r'<tbody>.+</tbody>', _reghtm)[0]
                         engsubs = re.findall(r'%s' % AjaxRequest.Regex['Regex01'], _tabledata)
                     else:
-                        raise RuntimeError('Error on GET [34] : %s' % _htm.status_code)
+                        raise RuntimeError('Error on GET [30] : %s' % _htm.status_code)
                     _subs, x = {}, 0
                     valids = []
                     for each in engsubs:
@@ -46,11 +46,14 @@ def main():
                         else:
                             pass
                     x = 0
-                    for link in valids:
-                        if x == 0: print('');x += 1
-                        else: x += 1
-                        print(" |%s| %s" % (str(x).zfill(len(str(len(valids)))), link))
-                    a = input('\n Select Subtitle : ')
+                    if len(valids) != 0:
+                        for link in valids:
+                            if x == 0: print('');x += 1
+                            else: x += 1
+                            print(" |%s| %s" % (str(x).zfill(len(str(len(valids)))), link))
+                        a = input('\n Select Subtitle : ')
+                    else:
+                        raise ValueError('0 English subtitles were found!')
                     if not a: None
                     else:
                         if not a.isdigit(): None
@@ -66,7 +69,7 @@ def main():
                                         webbrowser.open_new_tab(AjaxRequest.download+dlink.group(1))
                                     else: None
                                 else:
-                                    raise RuntimeError('Error on GET [65] : %s' % _htm.status_code)
+                                    raise RuntimeError('Error on GET [61] : %s' % _htm.status_code)
 if __name__ == '__main__':
     try:
         while True:
@@ -76,6 +79,8 @@ if __name__ == '__main__':
             else: break
     except requests.exceptions.ConnectionError:
         print("\n Connection Error")
+    except ValueError as e:
+        print("\n ValueError : %s" % e)
     except RuntimeError as e:
         print("\n RuntimeError : %s" % e)
     except KeyboardInterrupt:
