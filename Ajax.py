@@ -76,7 +76,8 @@ if __name__ == '__main__':
             main()
             _choice = input('\n [Y] to Continue : ')
             if _choice.lower() == 'y': os.system('cls' if os.name == 'nt' else 'clear')
-            else: break
+            else:
+                break
     except requests.exceptions.ConnectionError:
         print("\n Connection Error")
     except ValueError as e:
