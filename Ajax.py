@@ -53,7 +53,8 @@ def main():
                             print(" |%s| %s" % (str(x).zfill(len(str(len(valids)))), link))
                         a = input('\n Select Subtitle : ')
                     else:
-                        raise ValueError('0 English subtitles were found!')
+                        print(' 0 Subtitles were found!')
+                        a = None
                     if not a: None
                     else:
                         if not a.isdigit(): None
@@ -80,8 +81,6 @@ if __name__ == '__main__':
                 break
     except requests.exceptions.ConnectionError:
         print("\n Connection Error")
-    except ValueError as e:
-        print("\n ValueError : %s" % e)
     except RuntimeError as e:
         print("\n RuntimeError : %s" % e)
     except KeyboardInterrupt:
